@@ -26,7 +26,7 @@ int main()
 	
 	// Setting the Profile for the OpenGL.
 	// Option of choosing between Compat and Core.
-	// We choose core, because we won't be using and deprecated function from the previous versions of OpenGL
+	// We choose core, because we won't be using any deprecated function from the previous versions of OpenGL
 	// In other words, no backward compatibility
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -71,7 +71,7 @@ int main()
 	glfwMakeContextCurrent(window);
 
 	// Enable GLEW, setting glewExperimental to true.
-	// This allows GLEW take the mordern approach to retrive function pointers and extensions
+	// This allows GLEW take the modern approach to retrive function pointers and extensions
 	glewExperimental = GL_TRUE;
 
 	// Initialize GLEW to setup OpenGL function pointers
