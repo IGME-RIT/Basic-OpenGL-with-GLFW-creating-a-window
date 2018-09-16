@@ -16,11 +16,11 @@
  - In the top left (tool bar thing), click on 'Project' -> 'Properties'
  - Go to 'C/C++' -> 'General' -> 'Additional Include Directories'
    - Locate the 'include' folders of GLFW and GLEW
-      - This should be something like `$(SolutionDir)External Library/GLFW/include` and `$(SolutionDir)External Library/GLEW/include`
+      - This should be something like `$(SolutionDir)External Libraries/GLFW/include` and `$(SolutionDir)External Libraries/GLEW/include`
    - If you are successful, you will be able to call `#include <GL/glew.h>` or `#include <GLFW/glfw3.h>` in your `.cpp`s
  - Go to 'Linker' -> 'General' -> 'Additional Library Directories'
    - Locate the .lib files of GLFEW and GLEW
-      - Something like: `$(SolutionDir)External Library/GLEW/lib/Release/Win32` or `$(SolutionDir)External Library/GLFW/lib-vc2015`
+      - Something like: `$(SolutionDir)External Libraries/GLEW/lib/Release/Win32` or `$(SolutionDir)External Libraries/GLFW/lib-vc2015`
    - This makes sure the linker knows where to look to find these libraries
  - Go to 'Linker' -> 'Input' -> 'Additional Dependencies'
    - Add the following .lib in there:
