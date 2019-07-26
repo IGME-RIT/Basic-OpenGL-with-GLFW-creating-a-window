@@ -1,38 +1,71 @@
-Setting up GLFW and GLEW
+Documentation Author: Niko Procopi 2019
 
-Download the pre complied binaries for GLFW and GLEW from the given webpages.
-NOTE: Download the 32 bit binaries
-GLFW: http://www.glfw.org/download.html
-GLEW: http://glew.sourceforge.net/
+This tutorial was designed for Visual Studio 2017 / 2019
+If the solution does not compile, retarget the solution
+to a different version of the Windows SDK. If you do not
+have any version of the Windows SDK, it can be installed
+from the Visual Studio Installer Tool
 
-Extract the binaries put it in a place you'll remember
+Welcome to the Window Creation Tutorial!
+Prerequesites: Core C++
 
-Create an empty Visual Studio project.
+The first thing we need to do before rendering 3D graphics is 
+to create the window. We will be using GLFW and GLEW for this
 
-Go to the project properties:
+glfwWindowHint will set parameters for what our window will
+do, prior to creation of the window.
 
-1)	Go to C/C++ -> General
-	Go to "Additional Include Directories"
-	Locate and add the paths to the include folders of GLFW and GLEW here
+We want to let GLFW know that we will be using OpenGL 3.3
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	
-	The paths should look something like GLFW/include and GLEW/include
-
-2)	Go to Linker -> General
-	Go to "Additional Library Directories"
-	Locate and add the paths to the libraries of GLFW and GLEW
+We do not want the window to be resizable, because that can
+cause problems later on
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
-	The paths should look something like GLFW/lib-vc2015 and GLEW/lib/Release/Win32
+After our parameters are set, we can finally make the window
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, 
+						"Opening a window", nullptr, nullptr);
+						
+WIDTH and HEIGHT are set near the top of the screen as 800 and 600,
+"Opening a window" will be displayed in the window's title bar, feel
+free to change these to whatever you want.
+
+Further down the screen we set our Viewport. Viewport is the region of the
+screen that we want to draw to, which is all of it
+	glViewport(0, 0, screenWidth, screenHeight);
 	
-3)	Go to Linker -> Input
-	Go to "Additional Dependencies"
-	Add the following .lib in here:
-		opengl32.lib
-		glew32s.lib (OR glew32.lib if you don't want static lib)
-		glfw3.lib
-		
-4)	Apply the changes and you are all set
+GLFW gives us a boolean to determine if the window should be closing:
+	glfwWindowShouldClose(window)
+	
+This boolean becomes true when the window is closed. Notepad, Firefox,
+Google Chrome, and all other programs have minimize buttons and close 
+buttons. If we dont tell the window to close when the close button is pressed,
+nothing will happen.
 
+GLFW already detects when the button is hit, and it sets
+	glfwWindowShouldClose(window)
+	to be true, and then we close.
+	
+We have a loop to continuously draw to the screen:
+	while (!glfwWindowShouldClose(window))
+	
+Then the program ends after that loop, and the window is 
+closed by glfwTerminate();
 
-NOTE: The libraries and directories for the project have already been included in this project,
-	  if you encounter any linking errors, please make sure all the libraries and directories
-	  are properly attached
+Inside the loop, we check for keyboard input
+or the close button on the window being hit,
+	glfwPollEvents();
+	
+We set the color that we want the screen to clear to
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	
+We actually do the clearing of the screen:
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+And we pass the image we just made (cleared image) to the screen:
+	glfwSwapBuffers(window);
+	
+Congratulations, you're done, you have a window
+	
+
